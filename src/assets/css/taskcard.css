@@ -1,0 +1,75 @@
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+.clearfix:after {
+    clear: both
+}
+.clearfix span {
+    margin-right: 30px;
+}
+
+.ifoos{
+    font-size: 28px;
+    font-weight: bold;
+    color: red;
+}
+
+.box-card {
+    width: 100%;
+    border-radius: 20px !important;
+    background-color: #bbd8f9;
+    font-size: 30px;
+}
+
+.el-table{
+    background-color: #dff0d8;
+}
+
+.el-table thead{
+    font-size: 26px;
+}
+
+.el-table tbody{
+    font-size: 30px;
+}
+
+.el-table tbody .cell{
+    line-height: 45px !important;
+}
+
+.el-input{
+    font-size: 35px;
+
+}
+
+.el-input__inner{
+    text-align: center;
+    height: 60px;
+}
+
+.btn-operate{
+    font-size: 28px;
+    width: 90%;
+    background-color: #feb9ff;
+}
+.el-message-box{
+    width: 60%;
+}
+.el-message-box__title{
+    font-size: 30px;
+}
+.el-message-box__content{
+    font-size: 26px;
+    padding:30px 15px;
+}
+.el-message-box__headerbtn{
+    font-size: 30px;
+}
+.el-message-box__btns button{
+    width:30%;
+    height:50px;
+    font-size: 25px;
+    margin-right: 20px;
+}

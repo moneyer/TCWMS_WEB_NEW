@@ -1,0 +1,146 @@
+.header-title {
+    margin: 20px 0 30px 0;
+    font-family:"PingFang SC";
+    font-size: 40px;
+    font-weight: bolder;
+    text-align: center;
+}
+.header-font {
+    font-family:"PingFang SC";
+    font-size: 30px;
+}
+
+.btn-setting{
+    width: 100%;
+    font-size: 28px;
+    height: 60px;
+    border-radius: 30px;
+}
+
+.el-row {
+    margin-bottom: 35px;
+}
+.el-header {
+    background-color: #dcf5ee;
+    color: #333;
+}
+.el-input__inner{
+    font-size: 35px;
+    height: 55px;
+}
+.el-select-dropdown__item{
+    font-size: 30px !important;
+    padding: 10px 20px !important;
+    height: auto !important;
+    line-height:40px !important;
+}
+.el-message-box{
+    width: 60%;
+}
+.el-message-box__title{
+    font-size: 30px;
+}
+.el-message-box__content{
+    font-size: 26px;
+    padding:30px 15px;
+}
+.el-message-box__headerbtn{
+    font-size: 30px;
+}
+.el-message-box__btns button{
+    width:30%;
+    height:50px;
+    font-size: 25px;
+    margin-right: 20px;
+}
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+.clearfix:after {
+    clear: both
+}
+.clearfix span {
+    margin-right: 30px;
+}
+
+.el-table{
+    background-color: #dff0d8;
+}
+
+.el-table thead{
+    font-size: 26px;
+    background-color: #eef1f6;
+}
+
+.el-table tbody{
+    font-size: 30px;
+}
+
+.el-table tbody .cell{
+    line-height: 45px;
+}
+.el-table .warning-row {
+    background: #fff9cb;
+}
+
+.el-table .success-row {
+    background: #f6dcfb;
+}
+
+.el-input{
+    font-size: 35px;
+
+}
+
+.el-input__inner{
+    text-align: center;
+    height: 60px;
+}
+
+.btn-operate{
+    font-size: 28px;
+    width: 90%;
+    background-color: #feb9ff;
+    line-height: 50px;
+}
+
+.el-table__empty-block{
+    background-color: #ffffff;
+    font-size: 30px;
+}
+
+.el-select .el-input .el-select__caret.is-reverse {
+    transform: none!important;
+}
+
+.el-select .el-input .el-select__caret{
+    transform: none!important;
+}
+
+.el-select-dropdown__wrap {
+    max-height: unset;
+}
+.el-dialog{
+    width: 80%;
+}
+.el-dialog__title{
+    font-size: 30px;
+}
+.el-dialog__body .el-table{
+    font-size: 25px;
+    line-height: 40px;
+}
+.el-dialog__footer button{
+    width:20%;
+    height:50px;
+    font-size: 25px;
+    margin-right: 20px;
+}
+.el-dialog__headerbtn{
+    font-size: 25px;
+}
+.el-dialog__header{
+    padding-top: 25px;
+}

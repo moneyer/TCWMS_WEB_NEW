@@ -1,0 +1,126 @@
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+.clearfix:after {
+    clear: both
+}
+.clearfix span {
+    margin-right: 30px;
+}
+
+.ifoos{
+    font-size: 28px;
+    font-weight: bold;
+    color: red;
+}
+
+.box-card {
+    width: 100%;
+    border-radius: 20px ;
+    background-color: #bbd8f9;
+    /*font-size: 30px !important;*/
+}
+
+.el-table{
+    background-color: #dff0d8;
+    text-align: center;
+}
+
+.el-table thead{
+    font-size: 28px;
+    font-weight: bolder;
+    line-height: 45px ;
+}
+
+.el-table tbody{
+    font-size: 28px;
+    font-weight: bolder;
+}
+.el-table tbody .cell{
+    line-height: 60px ;
+}
+
+.el-input{
+    font-size: 28px;
+    /*font-weight: bolder;*/
+}
+
+.el-input__inner{
+    text-align: center;
+    height: 60px;
+    font-weight: bolder;
+}
+
+.el-message-box{
+    width: 60%;
+}
+.el-message-box__title{
+    font-size: 30px;
+}
+.el-message-box__content{
+    font-size: 28px;
+    padding:30px 15px;
+}
+.el-message-box__headerbtn{
+    font-size: 30px;
+}
+.el-message-box__btns button{
+    width:30%;
+    height:50px;
+    font-size: 28px;
+    margin-right: 20px;
+}
+.btn-operate{
+    font-size: 28px;
+    width: 95%;
+    height: 60px;
+    background-color: #feb9ff;
+    color: white;
+    border-radius: 10px;
+    /*font-weight: bolder;*/
+}
+.btn-setting{
+    font-size: 28px;
+    width: 80%;
+    border-radius: 10px;
+}
+.selectBody {
+    padding: 0px;
+    margin: 0px;
+    height:60px;
+    width:100%;
+    font-size:28px;
+    font-weight: bolder;
+}
+.header-font {
+    /*font-family:"PingFang SC";*/
+    font-size: 30px;
+    font-weight: bolder;
+}
+.boxes{
+    background-color: #f6dcfb;
+}
+.header {
+    background-color: #f9f9e6;
+    color: #333;
+}
+.el-header{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.el-row{
+    margin-bottom: 10px;
+}
+.el-card-header{
+    font-size: 30px;
+    font-weight: bolder;
+}
+.el-table th{
+    text-align: center;
+    overflow: visible;
+}
+.el-table .cell, .el-table th div{
+    overflow: visible;
+}
