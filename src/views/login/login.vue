@@ -37,7 +37,6 @@
 
 <script type="text/ecmascript-6">
   import { userLogin } from '../../api/user'
-  import { Message } from 'element-ui'
 
   export default {
     data() {
@@ -60,7 +59,7 @@
     methods: {
       showTips(message, type) {
         this.$message({
-          message: '输入信息不正确，请重试！',
+          message: message,
           duration: 2000,
           center: true,
           offset: 420,
@@ -73,20 +72,13 @@
             this._login()
           } else {
             this.showTips('输入信息不正确，请重试！', 'info')
-            // Message.info('输入信息不正确，请重试！')
-            // this.$message({
-            //   message: '输入信息不正确，请重试！',
-            //   duration: 2000,
-            //   center: true,
-            //   offset: 420
-            // })
             return false
           }
         })
       },
       _login() {
-        let userInfo = { 'sOpCd': this.ruleForm.userName, 'sPwd': this.ruleForm.password }
-        // let userInfo = { 'userName': this.ruleForm.userName, 'password': this.ruleForm.password }
+        // let userInfo = { 'sOpCd': this.ruleForm.userName, 'sPwd': this.ruleForm.password }
+        let userInfo = { 'userName': this.ruleForm.userName, 'password': this.ruleForm.password }
         if (!userInfo) {
           return false
         }
@@ -100,28 +92,13 @@
               this.$router.push('/menu')
             } else {
               Message.warning(data.Opname)
-              // this.$message({
-              //   message: data.Opname,
-              //   duration: 2000,
-              //   center: true,
-              //   offset: 420,
-              //   type: 'warning'
-              // })
               // tip 是否显示错误信息
               this.$data.ruleForm.tips = data.Opname
             }
           })
           .catch(
              (error) => {
-               // Message.error(error)
                this.showTips(error.message, 'error')
-              // this.$message({
-              //   message: error,
-              //   duration: 2000,
-              //   center: true,
-              //   offset: 420,
-              //   type: 'error'
-              // })
             }
           )
       }
