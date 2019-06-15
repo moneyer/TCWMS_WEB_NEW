@@ -8,7 +8,7 @@ import { Message, Loading } from 'element-ui'
 let loadingInstance
 
 const tcHttp = create({
-  showToast(...args) {
+  showToast(...   args) {
     Message(...args)
   },
   showLoading() {

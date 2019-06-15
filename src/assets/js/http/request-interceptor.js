@@ -1,4 +1,5 @@
 import { getCookie } from 'hanutil'
+import { HttpConst } from '../constant'
 
 let token
 /**
@@ -7,16 +8,14 @@ let token
  * @returns {*}
  */
 export default function(config) {
-  let baseUrl
   // 原 WMS 接口 API MOCK 地址
-  // baseUrl = 'https://3c030aaf-0d63-4b37-86fd-b224f755c772.mock.pstmn.io'
+  // let _config = { baseURL: 'https://3c030aaf-0d63-4b37-86fd-b224f755c772.mock.pstmn.io' }
   // 设计 WMS 接口 API MOCK 地址
-  baseUrl = 'https://74782739-fd40-4040-a1eb-a7db43d27a76.mock.pstmn.io'
+  // let _config = { baseURL: 'https://74782739-fd40-4040-a1eb-a7db43d27a76.mock.pstmn.io' }
   // 本地后台地址
-  // baseUrl = 'http://localhost:4441/'
+  // let _config = { baseURL: 'http://localhost:4441/' }
 
-  let _config = { baseURL: baseUrl }
-
+  let _config = { baseURL: HttpConst.BASE_URL }
   if (!token) {
     token = getCookie('cookie-token')
   }

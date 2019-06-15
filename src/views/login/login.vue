@@ -1,6 +1,6 @@
 <template>
   <div class="login-wrap">
-    <div class="project-title">同驰WMS系统</div>
+    <span class="project-title">同驰WMS系统</span>
     <div class="login-wrapper">
       <el-form
         :model="ruleForm"
@@ -84,6 +84,7 @@
         }
         userLogin(userInfo)
           .then(data => {
+            // if (data.errorCode === '200' && data.errorMsg === null) {
             if (data.Opid !== 'err') {
               this.initStoreLoginInfo(data, this)
               window.localStorage.clear()
@@ -91,16 +92,13 @@
               window.localStorage.setItem('storeInfo', JSON.stringify(data))
               this.$router.push('/menu')
             } else {
-              Message.warning(data.Opname)
+              // this.showTips(data.errorMsg, 'error')
+              // this.$data.ruleForm.tips = data.errorMsg
+              this.showTips(data.Opname, 'error')
               // tip 是否显示错误信息
               this.$data.ruleForm.tips = data.Opname
             }
           })
-          .catch(
-             (error) => {
-               this.showTips(error.message, 'error')
-            }
-          )
       }
     }
   }
@@ -119,6 +117,7 @@
 
     .project-title
       position absolute
+      display block
       top 50%
       width 100%
       margin-top -230px
