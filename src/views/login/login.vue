@@ -3,42 +3,51 @@
     <span class="project-title">同驰WMS系统</span>
     <div class="login-wrapper">
       <el-form
+        ref="ruleForm"
         :model="ruleForm"
         :rules="rules"
-        ref="ruleForm"
-        label-width="0px">
+        label-width="0px"
+      >
         <el-form-item prop="userName">
           <el-input
             v-model="ruleForm.userName"
             placeholder="工号"
             class="large-font"
-            size="large"/>
+            size="large"
+          />
         </el-form-item>
         <el-form-item prop="password">
           <el-input
+            v-model="ruleForm.password"
             type="password"
             placeholder="密码"
-            v-model="ruleForm.password"
             class="large-font"
             size="large"
-            @keyup.enter.native="submitForm('ruleForm')"/>
+            @keyup.enter.native="submitForm('ruleForm')"
+          />
         </el-form-item>
         <div class="login-btn">
           <el-button
             type="primary"
+            class="large-font"
             @click="submitForm('ruleForm')"
-            class="large-font">登录</el-button>
+          >
+            登录
+          </el-button>
         </div>
-        <p class="tips-text">{{ ruleForm.tips }}</p>
+        <p class="tips-text">
+          {{ ruleForm.tips }}
+        </p>
       </el-form>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import { userLogin } from '../../api/user'
+  import { userLogin } from 'api/user'
+  import pageCreate from 'utils/page-creat'
 
-  export default {
+  export default pageCreate({
     data() {
       return {
         ruleForm: {
@@ -57,63 +66,41 @@
       }
     },
     methods: {
-      showTips(message, type) {
-        this.$message({
-          message: message,
-          duration: 2000,
-          center: true,
-          offset: 420,
-          type: type
-        })
-      },
-      submitForm: function (formName) {
-        this.$refs[formName].validate((valid) => {
+      submitForm () {
+        this.$refs.ruleForm.validate((valid) => {
           if (valid) {
             this._login()
           } else {
-            this.showTips('输入信息不正确，请重试！', 'info')
+            this.$_showWarningTips('输入信息不正确，请重试！')
             return false
           }
         })
       },
       _login() {
         // let userInfo = { 'sOpCd': this.ruleForm.userName, 'sPwd': this.ruleForm.password }
-        let userInfo = { 'userName': this.ruleForm.userName, 'password': this.ruleForm.password }
-        if (!userInfo) {
-          return false
-        }
+        let userInfo = { userName: this.ruleForm.userName, password: this.ruleForm.password }
         userLogin(userInfo)
           .then(data => {
-            // if (data.errorCode === '200' && data.errorMsg === null) {
-            if (data.Opid !== 'err') {
               this.initStoreLoginInfo(data, this)
               window.localStorage.clear()
               // 登录信息保存到localStorage
               window.localStorage.setItem('storeInfo', JSON.stringify(data))
-              this.$router.push('/menu')
-            } else {
-              // this.showTips(data.errorMsg, 'error')
-              // this.$data.ruleForm.tips = data.errorMsg
-              this.showTips(data.Opname, 'error')
-              // tip 是否显示错误信息
-              this.$data.ruleForm.tips = data.Opname
-            }
+              this.$_routerPush('/menu')
           })
       }
     }
-  }
-  document.title = '登录-同驰WMS系统'
+  })
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-  @import "../../assets/stylus/variable.styl"
-  @import '../../assets/css/main.css'
-  @import '../../assets/css/color-dark.css'
+  @import '~stylus/variable.styl'
+  @import '~css/main.css'
 
   .login-wrap
     position relative
     width 100%
     height 100%
+    background #324157
 
     .project-title
       position absolute

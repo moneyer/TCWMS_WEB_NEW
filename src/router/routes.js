@@ -15,12 +15,14 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    meta: { title: '登录-同驰WMS系统' }
   },
   {
     path: '/menu',
     name: 'menu',
-    component: Menu
+    component: Menu,
+    meta: { title: '菜单-同驰WMS系统' }
   },
   {
     path: '/deli-pick',

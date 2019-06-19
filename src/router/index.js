@@ -8,4 +8,16 @@ const router = new Router({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  // 设置页面标题
+  setDocumentTitle(to)
+  next()
+})
+
+const setDocumentTitle = (to) => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+}
+
 export default router

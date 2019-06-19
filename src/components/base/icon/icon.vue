@@ -57,7 +57,7 @@
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-  @import "../../assets/stylus/variable.styl"
+  @import "~stylus/variable.styl"
   .icon
     width 1em
     height 1em

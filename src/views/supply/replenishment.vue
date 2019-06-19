@@ -5,114 +5,153 @@
   <el-container direction="vertical">
     <el-header
       height="auto"
-      style="width: 100%">
+      style="width: 100%"
+    >
       <el-row class="header-title">
         <el-col :span="24">
           <div
+            v-if="pageStates.curBillBcd=='CRD'"
             class="grid-content"
-            v-if="pageStates.curBillBcd=='CRD'">拆零补货</div>
+          >
+            拆零补货
+          </div>
           <div
+            v-else-if="pageStates.curBillBcd=='ZRD'"
             class="grid-content"
-            v-else-if="pageStates.curBillBcd=='ZRD'">整件补货</div>
+          >
+            整件补货
+          </div>
           <div
+            v-else-if="pageStates.curBillBcd=='SRD'"
             class="grid-content"
-            v-else-if="pageStates.curBillBcd=='SRD'">拆零存储补货</div>
+          >
+            拆零存储补货
+          </div>
         </el-col>
       </el-row>
       <el-row
         :gutter="20"
-        class="header-font">
+        class="header-font"
+      >
         <el-col :span="8">
           <div class="grid-content">
-            当前模式：{{pageStates.showMode}}
+            当前模式：{{ pageStates.showMode }}
           </div>
         </el-col>
         <el-col :span="8">
           <div class="grid-content">
-            操作人：{{pageStates.showOpName}}
+            操作人：{{ pageStates.showOpName }}
           </div>
         </el-col>
         <el-col :span="4">
           <el-badge
             class="resetsup"
             :value="pageStates.showLTaskNum"
-            :max="99">
+            :max="99"
+          >
             <el-button
               type="primary"
-              class="badge-style">{{pageStates.showLTask}}</el-button>
+              class="badge-style"
+            >
+              {{ pageStates.showLTask }}
+            </el-button>
           </el-badge>
         </el-col>
         <el-col :span="4">
           <el-badge
             :value="pageStates.showRTaskNum"
-            :max="99">
+            :max="99"
+          >
             <el-button
               type="warning"
-              class="badge-style">{{pageStates.showRTask}}</el-button>
+              class="badge-style"
+            >
+              {{ pageStates.showRTask }}
+            </el-button>
           </el-badge>
         </el-col>
       </el-row>
       <el-row
         :gutter="20"
-        class="header-font">
+        class="header-font"
+      >
         <el-col :span="13">
           <div class="grid-content">
-            单据号：{{billHead.Billno}}
+            单据号：{{ billHead.Billno }}
           </div>
         </el-col>
         <el-col :span="8">
           <div class="grid-content">
-            总件数：{{billHead.Gdscnt}}
+            总件数：{{ billHead.Gdscnt }}
           </div>
         </el-col>
       </el-row>
       <el-row :gutter="50">
         <el-col :span="6">
           <el-button
+            v-if="pageStates.curMode==='1'"
+            v-loading.fullscreen.lock="pageStates.fullscreenLoading"
             type="primary"
             class="btn-setting"
             @click="handleGetTask('1')"
-            v-loading.fullscreen.lock="pageStates.fullscreenLoading"
-            v-if="pageStates.curMode==='1'">获取任务</el-button>
+          >
+            获取任务
+          </el-button>
         </el-col>
         <el-col :span="6">
           <el-button
+            v-if="pageStates.curMode==='1'"
+            v-loading.fullscreen.lock="pageStates.fullscreenLoading"
             type="success"
             class="btn-setting"
             @click="handleGetTask('2')"
-            v-loading.fullscreen.lock="pageStates.fullscreenLoading"
-            v-if="pageStates.curMode==='1'">补货</el-button>
+          >
+            补货
+          </el-button>
         </el-col>
         <el-col
           :span="6"
-          :offset="6">
+          :offset="6"
+        >
           <el-button
+            v-if="pageStates.curMode==='2'"
+            v-loading.fullscreen.lock="pageStates.fullscreenLoading"
             type="info"
             class="btn-setting"
-            v-loading.fullscreen.lock="pageStates.fullscreenLoading"
             @click="handleCheckBill"
-            v-if="pageStates.curMode==='2'">完成</el-button>
+          >
+            完成
+          </el-button>
         </el-col>
         <el-col :span="6">
           <el-button
             type="warning"
             class="btn-setting"
-            @click="handleQueryRecord">查看记录</el-button>
+            @click="handleQueryRecord"
+          >
+            查看记录
+          </el-button>
         </el-col>
         <el-col :span="6">
           <el-button
+            v-if="pageStates.curMode==='1'"
             type="danger"
             class="btn-setting"
             @click="handleReturnToMenu"
-            v-if="pageStates.curMode==='1'">退出</el-button>
+          >
+            退出
+          </el-button>
         </el-col>
         <el-col :span="6">
           <el-button
+            v-if="pageStates.curMode==='2'"
+            v-loading.fullscreen.lock="pageStates.fullscreenLoading"
             type="danger"
             class="btn-setting"
             @click="handleGetTask('1')"
-            v-loading.fullscreen.lock="pageStates.fullscreenLoading"
-            v-if="pageStates.curMode==='2'">返回</el-button>
+          >
+            返回
+          </el-button>
         </el-col>
       </el-row>
     </el-header>
@@ -122,43 +161,53 @@
         :key="PickBody.Billno"
         :table-data="[PickBody]"
         :now-mode="pageStates.curMode"
-        v-on:listentobillfinish="handleCheckBill"/>
+        @listentobillfinish="handleCheckBill"
+      />
     </el-main>
     <el-dialog
       title="查看记录"
-      :visible.sync="pageStates.dialogTableVisible">
+      :visible.sync="pageStates.dialogTableVisible"
+    >
       <el-table :data="billQueryBody">
         <el-table-column
           property="Gdsname"
           label="品名"
-          width="330"></el-table-column>
+          width="330"
+        />
         <el-table-column
           property="Setnum"
           label="应补件数"
-          width="130"></el-table-column>
+          width="130"
+        />
         <el-table-column
           property="Factsetnum"
           label="实补件数"
-          width="130"></el-table-column>
+          width="130"
+        />
         <el-table-column
           property="Status"
           label="状态"
-          width="160"></el-table-column>
+          width="160"
+        />
       </el-table>
       <div
         slot="footer"
-        class="dialog-footer">
+        class="dialog-footer"
+      >
         <el-button
           type="primary"
-          @click="pageStates.dialogTableVisible = false">关 闭</el-button>
+          @click="pageStates.dialogTableVisible = false"
+        >
+          关 闭
+        </el-button>
       </div>
     </el-dialog>
   </el-container>
 </template>
 
 <script type="text/ecmascript-6">
-  import TaskCard from '../../components/task-card/task-card'
-  import { getReplenishmentData, doCheckReplenishBill, getReplenishTaskNum, getReplenishRecord } from '../../api/replenishment'
+  import TaskCard from 'components/task-card'
+  import { getReplenishmentData, doCheckReplenishBill, getReplenishTaskNum, getReplenishRecord } from 'api/replenishment'
   export default {
     components: {
       TaskCard
@@ -205,6 +254,15 @@
         }
       }
     },
+    watch: {
+      'pageStates.curMode': function (value) {
+        if (value === '1') {
+          this.pageStates.showMode = '拣货'
+        } else {
+          this.pageStates.showMode = '补货'
+        }
+      }
+    },
     mounted: function () {
       // 判断登录状态是否存在
       if (this.$store.state.Whid === undefined || this.$store.state.Whid === '') {
@@ -233,15 +291,6 @@
       window.addEventListener('popstate', function () {
         history.pushState(null, null, document.URL)
       })
-    },
-    watch: {
-      'pageStates.curMode': function (value) {
-        if (value === '1') {
-          this.pageStates.showMode = '拣货'
-        } else {
-          this.pageStates.showMode = '补货'
-        }
-      }
     },
     methods: {
       // 非空判断
@@ -421,6 +470,6 @@
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-  @import "../../assets/stylus/variable.styl"
-  @import '../../assets/css/replenishment.css'
+  @import "~stylus/variable.styl"
+  @import '~css/replenishment.css'
 </style>

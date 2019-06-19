@@ -4,42 +4,45 @@
 <template>
   <div
     class="module-wrapper"
-    v-on:click="jumpToPath(module.jumpUrl,module.jumpBcd)">
-    <tc-icon :icon="module.icon"></tc-icon>
-    <div class="module-text">{{ module.moduleText }}</div>
+    @click="jumpToPath()"
+  >
+    <tc-icon :icon="module.icon" />
+    <div class="module-text">
+      {{ module.moduleText }}
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import TcIcon from '../../components/icon/icon'
-    // 组件名
-    const COMPONENT_NAME = 'tc-module'
+  import TcIcon from 'base/icon'
+  import pageCreate from 'utils/page-creat'
+  // 组件名
+  const COMPONENT_NAME = 'menu-module'
 
-    export default {
-      name: COMPONENT_NAME,
-      props: {
-        module: Object
-      },
-      data() {
-          return {
-          }
-      },
-      components: {
-        TcIcon
-      },
-      computed: {},
-      methods: {
-        jumpToPath(pathName, bcd) {
-          const _this = this
-          let pathInfo = { path: pathName, query: { 'bcd': bcd } }
-          _this.$router.push(pathInfo)
+  export default pageCreate({
+    name: COMPONENT_NAME,
+    components: {
+      TcIcon
+    },
+    props: {
+      module: Object
+    },
+    data() {
+        return {
         }
+    },
+    computed: {},
+    methods: {
+      jumpToPath() {
+        let pathInfo = { path: this.module.jumpUrl, query: { 'bcd': this.module.bcd } }
+        this.$_routerPush(pathInfo)
       }
     }
+  })
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-  @import "../../assets/stylus/variable.styl"
+  @import "~stylus/variable.styl"
   .module-wrapper
     width 300px
     height 80px

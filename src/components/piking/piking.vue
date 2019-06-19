@@ -13,50 +13,76 @@
       <el-main>
         <el-row :gutter="20">
           <el-col :span="4">
-            <div class="grid-content bg-purple">单据号：</div></el-col>
+            <div class="grid-content bg-purple">
+              单据号：
+            </div>
+          </el-col>
           <el-col :span="8">
-            <div class="grid-content bg-purple-light">{{ billHead.Billno }}</div>
+            <div class="grid-content bg-purple-light">
+              {{ billHead.Billno }}
+            </div>
           </el-col>
           <el-col :span="4">
-            <div class="grid-content bg-purple">拣货人</div>
+            <div class="grid-content bg-purple">
+              拣货人
+            </div>
           </el-col>
           <el-col :span="8">
-            <div class="grid-content bg-purple-light">{{ billHead.Pickopinfo }}</div>
+            <div class="grid-content bg-purple-light">
+              {{ billHead.Pickopinfo }}
+            </div>
           </el-col>
         </el-row>
 
         <el-row :gutter="20">
           <el-col :span="4">
-            <div class="grid-content bg-purple">线路：</div>
+            <div class="grid-content bg-purple">
+              线路：
+            </div>
           </el-col>
           <el-col :span="8">
-            <div class="grid-content bg-purple-light">{{ billHead.Lineinfo }}</div>
+            <div class="grid-content bg-purple-light">
+              {{ billHead.Lineinfo }}
+            </div>
           </el-col>
           <el-col
             v-if="pageStates.curBillBcd !== 'CLP'"
-            :span="4">
-            <div class="grid-content bg-purple">总件数：</div>
+            :span="4"
+          >
+            <div class="grid-content bg-purple">
+              总件数：
+            </div>
           </el-col>
           <el-col
             v-if="pageStates.curBillBcd !== 'CLP'"
-            :span="4">
-            <div class="grid-content bg-purple-light">{{ billHead.Tsetnum }}</div>
+            :span="4"
+          >
+            <div class="grid-content bg-purple-light">
+              {{ billHead.Tsetnum }}
+            </div>
           </el-col>
           <el-col
             v-if="pageStates.curBillBcd === 'CLP'"
-            :span="4">
-            <div class="grid-content bg-purple">箱号：</div>
+            :span="4"
+          >
+            <div class="grid-content bg-purple">
+              箱号：
+            </div>
           </el-col>
           <el-col
             v-if="pageStates.curBillBcd === 'CLP'"
-            :span="4">
-            <div class="grid-content bg-purple-light">{{ billHead.CurBoxcd }}</div>
+            :span="4"
+          >
+            <div class="grid-content bg-purple-light">
+              {{ billHead.CurBoxcd }}
+            </div>
           </el-col>
           <el-col :span="4">
             <el-button
               size="large"
               class="text"
-              @click="_showFinished">
+              @click="_showFinished"
+            >
               {{ pageStates.showFinishedButtonText }}
             </el-button>
           </el-col>
@@ -64,19 +90,25 @@
 
         <el-row :gutter="20">
           <el-col :span="4">
-            <div class="grid-content bg-purple">总行数：</div>
+            <div class="grid-content bg-purple">
+              总行数：
+            </div>
           </el-col>
           <el-col :span="4">
-            <div class="grid-content bg-purple-light"></div>
+            <div class="grid-content bg-purple-light" />
           </el-col>
           <el-col :span="4">
-            <div class="grid-content bg-purple">剩余数：</div>
+            <div class="grid-content bg-purple">
+              剩余数：
+            </div>
           </el-col>
           <el-col :span="4">
-            <div class="grid-content bg-purple-light"></div>
+            <div class="grid-content bg-purple-light" />
           </el-col>
           <el-col :span="5">
-            <div class="grid-content bg-purple">当前模式：</div>
+            <div class="grid-content bg-purple">
+              当前模式：
+            </div>
           </el-col>
           <el-col :span="3">
             <div class="grid-content bg-yellow">
@@ -88,15 +120,19 @@
 
         <el-row :gutter="20">
           <el-col
+            v-if="pageStates.curBillBcd === 'CLP'"
             :span="20"
-            v-if="pageStates.curBillBcd === 'CLP'">
+          >
             <el-input
+              v-model="billHead.Pickboxcd"
               class="mid-text"
               placeholder="请输入箱号"
               suffix-icon="el-icon-edit"
-              v-model="billHead.Pickboxcd"
-              @keyup.enter.native="handleGetBillInfo">
-              <template slot="prepend">拣货箱号:</template>
+              @keyup.enter.native="handleGetBillInfo"
+            >
+              <template slot="prepend">
+                拣货箱号:
+              </template>
             </el-input>
           </el-col>
         </el-row>
@@ -107,39 +143,43 @@
               class="mid-text"
               type="primary"
               size="large"
+              :disabled="!buttonStatus.bGetBillEnb"
               @click="handleGetBillInfo"
-              v-bind:disabled="!buttonStatus.bGetBillEnb">
+            >
               获取单据
             </el-button>
           </el-col>
           <el-col :span="5">
             <el-button
+              v-loading.fullscreen.lock="pageStates.fullscreenLoading"
               class="mid-text"
               type="success"
               size="large"
-              @click="handleFinishPick"
-              v-bind:disabled="!buttonStatus.bEndPickEnb"
-              v-loading.fullscreen.lock="pageStates.fullscreenLoading"
+              :disabled="!buttonStatus.bEndPickEnb"
               element-loading-text="处理中"
               element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(0, 0, 0, 0.1)">
+              element-loading-background="rgba(0, 0, 0, 0.1)"
+              @click="handleFinishPick"
+            >
               <span v-if="pageStates.curBillBcd=='CLP'">拣货完成</span>
               <span v-else>开始分播</span>
             </el-button>
           </el-col>
           <el-col
+            v-if="pageStates.curBillBcd !== 'CLP'"
             :span="5"
-            v-if="pageStates.curBillBcd !== 'CLP'">
+          >
             <el-button
+              v-loading.fullscreen.lock="pageStates.fullscreenLoading"
               class="mid-text"
               type="warning"
               size="large"
-              @click="handleFinishSow"
-              v-bind:disabled="!buttonStatus.bEndSowEnb"
-              v-loading.fullscreen.lock="pageStates.fullscreenLoading"
+              :disabled="!buttonStatus.bEndSowEnb"
               element-loading-text="处理中"
               element-loading-spinner="el-icon-loading"
-              element-loading-background="rgba(0, 0, 0, 0.1)">
+              element-loading-background="rgba(0, 0, 0, 0.1)"
+              @click="handleFinishSow"
+            >
               <span>分播完成</span>
             </el-button>
           </el-col>
@@ -148,8 +188,10 @@
               class="mid-text"
               type="danger"
               size="large"
+              :disabled="!buttonStatus.bCloseEnb"
               @click="handleCheckCloseStatus"
-              v-bind:disabled="!buttonStatus.bCloseEnb">关闭
+            >
+              关闭
             </el-button>
           </el-col>
         </el-row>
@@ -157,47 +199,54 @@
         <el-dialog
           title="提示"
           :visible.sync="pageStates.dialogVisible"
-          width="30%">
-          <span>{{pageStates.dialogText}}</span>
+          width="30%"
+        >
+          <span>{{ pageStates.dialogText }}</span>
           <span
             slot="footer"
-            class="dialog-footer">
+            class="dialog-footer"
+          >
             <el-button @click="pageStates.dialogVisible = false">取 消</el-button>
             <el-button
+              v-if="buttonStatus.bDialogComfirm"
               type="primary"
               @click="handleReturnToMenu"
-              v-if="buttonStatus.bDialogComfirm">确 定</el-button>
+            >确 定</el-button>
           </span>
         </el-dialog>
       </el-main>
       <el-footer>
         <div class="billbody">
           <el-card
-            class="box-card"
             v-for="(dr,idx) in billBody"
-            :key="idx">
+            :key="idx"
+            class="box-card"
+          >
             <div
               slot="header"
-              class="clearfix large-text-l color-red">
+              class="clearfix large-text-l color-red"
+            >
               <el-row :gutter="20">
                 <el-col :span="6">
-                  <span>{{dr.Slcd}}</span>
+                  <span>{{ dr.Slcd }}</span>
                 </el-col>
                 <el-col :span="6">
-                  <span v-if="pageStates.curBillBcd=='CLP'">应拣数：{{dr.Num}}</span>
-                  <span v-else-if="!pageStates.bSowing">件数：{{dr.Setnum}}</span>
-                  <span v-else>件数：{{dr.Factsetnum}}</span>
+                  <span v-if="pageStates.curBillBcd=='CLP'">应拣数：{{ dr.Num }}</span>
+                  <span v-else-if="!pageStates.bSowing">件数：{{ dr.Setnum }}</span>
+                  <span v-else>件数：{{ dr.Factsetnum }}</span>
                 </el-col>
                 <el-col :span="8">
-                  <span v-if="pageStates.bSowing">集货位：{{dr.Lineseq}}</span>
+                  <span v-if="pageStates.bSowing">集货位：{{ dr.Lineseq }}</span>
                 </el-col>
                 <el-col :span="4">
                   <el-button
                     v-if="!pageStates.bSowing"
                     type="success"
                     class="float-right mid-text"
-                    v-bind:disabled="pageStates.bShowFinishData"
-                    @click="handleCommitRowPick(idx)">完成
+                    :disabled="pageStates.bShowFinishData"
+                    @click="handleCommitRowPick(idx)"
+                  >
+                    完成
                   </el-button>
                 </el-col>
                 <el-col :span="4">
@@ -213,29 +262,36 @@
             <div class="mid-text item">
               <el-row :gutter="20">
                 <el-col :span="pageStates.bSowing? 22:16">
-                  <span :class="pageStates.bSowing? 'large-text-l':''">{{dr.Gdsname }}</span>
+                  <span :class="pageStates.bSowing? 'large-text-l':''">{{ dr.Gdsname }}</span>
                 </el-col>
                 <el-col
+                  v-if="!pageStates.bSowing"
                   :span="8"
-                  v-if="!pageStates.bSowing">
+                >
                   <el-input
                     v-if="pageStates.curBillBcd=='CLP'"
+                    v-model="dr.Factnum"
                     placeholder="实拣数"
                     suffix-icon="el-icon-edit"
                     class="large-text"
-                    v-model="dr.Factnum"
-                    type="number">
-                    <template slot="prepend">实拣数:</template>
+                    type="number"
+                  >
+                    <template slot="prepend">
+                      实拣数:
+                    </template>
                   </el-input>
                   <el-input
                     v-else-if="!pageStates.bSowing"
+                    v-model="dr.Factsetnum"
                     placeholder="实拣件数"
                     suffix-icon="el-icon-edit"
                     class="large-text"
-                    v-model="dr.Factsetnum"
                     type="number"
-                    v-on:input="reCalculateNum(idx)">
-                    <template slot="prepend">实拣件数:</template>
+                    @input="reCalculateNum(idx)"
+                  >
+                    <template slot="prepend">
+                      实拣件数:
+                    </template>
                   </el-input>
                 </el-col>
                 <el-col :span="2">
@@ -243,13 +299,16 @@
                     v-if="pageStates.bSowing"
                     type="success"
                     class="float-right mid-text"
-                    @click="handleCommitRowPick(idx)">完成
+                    @click="handleCommitRowPick(idx)"
+                  >
+                    完成
                   </el-button>
                 </el-col>
               </el-row>
               <el-row
                 :gutter="20"
-                class="color-red">
+                class="color-red"
+              >
                 <el-col :span="4">
                   规格：{{ dr.Pack }}
                 </el-col>
@@ -257,14 +316,16 @@
                   单位：{{ dr.Packunit }}
                 </el-col>
                 <el-col
+                  v-if="dr.Barcode!=undefined && dr.Barcode!=''"
                   :span="5"
-                  v-if="dr.Barcode!=undefined && dr.Barcode!=''">
+                >
                   条码：{{ dr.Barcode.substring(7,13) }}
                 </el-col>
                 <el-col
+                  v-if="pageStates.bSowing"
                   :span="12"
-                  v-if="pageStates.bSowing">
-                  门店：{{dr.Sitetext }}
+                >
+                  门店：{{ dr.Sitetext }}
                 </el-col>
               </el-row>
             </div>
@@ -276,12 +337,13 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { getBillInfo, setUnitePickRowDone } from '../../api/picking'
+  import { getBillInfo, setUnitePickRowDone } from 'api/picking'
+  import pageCreate from 'utils/page-creat'
   // 组件名
   const COMPONENT_NAME = 'piking'
   // 对外使用的常量
   // TCConstant = {}
-  export default {
+  export default pageCreate({
     name: COMPONENT_NAME,
     props: {},
     data() {
@@ -1039,11 +1101,11 @@
         this.pageStates.fullscreenLoading = false
       }
     }
-  }
+  })
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-  @import "../../assets/stylus/variable.styl"
+  @import "~stylus/variable.styl"
   .container
     width 100%
 

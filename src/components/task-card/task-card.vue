@@ -8,8 +8,8 @@
     <div
       slot="header"
       class="clearfix">
-      <span>{{slcd}}</span>
-      <span v-if="this.nowMode === '2' && this.zcsl !== null && this.zcsl !== ''">暂存位:{{zcsl}}</span>
+      <span>{{ slcd }}</span>
+      <span v-if="this.nowMode === '2' && this.zcsl !== null && this.zcsl !== ''">暂存位:{{ zcsl }}</span>
     </div>
     <div>
       <el-table
@@ -67,10 +67,11 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { doFinishReplenish } from '../../api/replenishment'
+  import { doFinishReplenish } from 'api/replenishment'
+  import pageCreate from 'utils/page-creat'
   // 组件名
   const COMPONENT_NAME = 'task-card'
-  export default {
+  export default pageCreate({
     name: COMPONENT_NAME,
     props: {
       tableData: {
@@ -166,10 +167,10 @@
           })
       }
     }
-  }
+  })
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-  @import "../../assets/stylus/variable.styl"
-  @import '../../assets/css/task-card.css'
+  @import "~stylus/variable.styl"
+  @import '~css/task-card.css'
 </style>
