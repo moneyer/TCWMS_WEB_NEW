@@ -1,4 +1,4 @@
-import TCHttp from '../assets/js/http/http-client'
+import TCHttp from 'http/http-client'
 
 // export function userLogin({ sOpCd, sPwd }) {
 //   const url = '/TCWMS_Serv_SYS.svc/handleLogin'

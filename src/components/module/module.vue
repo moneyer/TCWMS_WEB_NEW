@@ -4,9 +4,13 @@
 <template>
   <div
     class="module-wrapper"
+    :style="{background: module.backgroundColor}"
     @click="jumpToPath()"
   >
-    <tc-icon :icon="module.icon" />
+    <tc-icon
+      :icon="module.icon"
+      :color="module.iconColor"
+    />
     <div class="module-text">
       {{ module.moduleText }}
     </div>
@@ -51,7 +55,9 @@
     align-items center
     margin $spacing-text
     padding $spacing-page-margin
-    primary-text()
+    font-size $font-size-medium
+    color $color-white
+    line-height 45px
     letter-spacing $letter-spacing
     text-align center
     font-weight bolder
