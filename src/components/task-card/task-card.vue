@@ -3,64 +3,74 @@
 */
 <template>
   <el-card
+    v-if="rowData.length>0"
     class="box-card"
-    v-if="rowData.length>0">
+  >
     <div
       slot="header"
-      class="clearfix">
+      class="clearfix"
+    >
       <span>{{ slcd }}</span>
       <span v-if="this.nowMode === '2' && this.zcsl !== null && this.zcsl !== ''">暂存位:{{ zcsl }}</span>
     </div>
     <div>
       <el-table
         :data="rowData"
-        style="width: 100%">
+        style="width: 100%"
+      >
         <el-table-column
           label="品 名"
-          width="330">
+          width="330"
+        >
           <template slot-scope="scope">
             <span>{{ scope.row.Gdsname }}({{ scope.row.Gdscd }})</span>
             <span
+              v-if="scope.row.Ifoos==='1'"
               class="ifoos"
-              v-if="scope.row.Ifoos==='1'">缺货</span>
+            >缺货</span>
           </template>
         </el-table-column>
         <el-table-column
           label="规 格"
-          width="100">
+          width="100"
+        >
           <template slot-scope="scope">
             <span>{{ scope.row.Pack }}</span>
           </template>
         </el-table-column>
         <el-table-column
           label="应补件数"
-          width="130">
+          width="130"
+        >
           <template slot-scope="scope">
             <span>{{ scope.row.Setnum }}</span>
           </template>
         </el-table-column>
         <el-table-column
           label="实补件数"
-          width="160">
+          width="160"
+        >
           <template slot-scope="scope">
             <el-input
+              v-model="scope.row.Factsetnum"
               type="number"
-              v-model="scope.row.Factsetnum"></el-input>
+            />
           </template>
         </el-table-column>
         <el-table-column
           label="操 作"
-          width="180">
+          width="180"
+        >
           <template slot-scope="scope">
             <el-button
+              v-loading.fullscreen.lock="fullscreenLoading"
               class="btn-operate"
               @click="handleDoFinishTask(scope.row, scope.$index)"
-              v-loading.fullscreen.lock="fullscreenLoading">
+            >
               {{ btntext }}
             </el-button>
           </template>
         </el-table-column>
-
       </el-table>
     </div>
   </el-card>

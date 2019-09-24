@@ -9,11 +9,12 @@
   >
     <tc-icon
       :icon="module.icon"
-      :color="module.iconColor"
+      color="white"
     />
-    <div class="module-text">
-      {{ module.moduleText }}
-    </div>
+    <span
+      class="module-text"
+      v-text="module.moduleText"
+    />
   </div>
 </template>
 
@@ -32,8 +33,7 @@
       module: Object
     },
     data() {
-        return {
-        }
+        return {}
     },
     computed: {},
     methods: {

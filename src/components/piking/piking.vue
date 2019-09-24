@@ -161,7 +161,7 @@
               element-loading-background="rgba(0, 0, 0, 0.1)"
               @click="handleFinishPick"
             >
-              <span v-if="pageStates.curBillBcd=='CLP'">拣货完成</span>
+              <span v-if="pageStates.curBillBcd === 'CLP'">拣货完成</span>
               <span v-else>开始分播</span>
             </el-button>
           </el-col>
@@ -231,7 +231,7 @@
                   <span>{{ dr.Slcd }}</span>
                 </el-col>
                 <el-col :span="6">
-                  <span v-if="pageStates.curBillBcd=='CLP'">应拣数：{{ dr.Num }}</span>
+                  <span v-if="pageStates.curBillBcd === 'CLP'">应拣数：{{ dr.Num }}</span>
                   <span v-else-if="!pageStates.bSowing">件数：{{ dr.Setnum }}</span>
                   <span v-else>件数：{{ dr.Factsetnum }}</span>
                 </el-col>
@@ -554,7 +554,7 @@
         }).catch(function (error) {
           _this.$notify.error({
             title: '错误',
-            message: error
+            message: error.message
           })
           // _this.$message({
           //   message: error,
@@ -562,7 +562,6 @@
           //   center: true,
           //   offset: 420
           // })
-          console.log(error)
           // 关闭处理中标志
           _this.$data.pageStates.bDealingBusiness = false
           // 关闭全屏遮罩
@@ -751,7 +750,6 @@
             //   title: '错误',
             //   message: error
             // })
-            console.log(error)
             // 关闭处理中标志
             _this.pageStates.bDealingBusiness = false
             // 关闭全屏遮罩
@@ -853,9 +851,8 @@
               }).catch(function (error) {
                 self.$notify.error({
                   title: '错误',
-                  message: error
+                  message: error.message
                 })
-                console.log(error)
                 // 关闭处理中标志
                 self.$data.pageStates.bDealingBusiness = false
                 // 关闭完成中处理标志
@@ -878,7 +875,7 @@
           }).catch(function (error) {
             self.$notify.error({
               title: '错误',
-              message: error
+              message: error.message
             })
             console.log(error)
             // 关闭处理中标志
@@ -1031,9 +1028,8 @@
         }).catch(function (error) {
           self.$notify.error({
             title: '错误',
-            message: error
+            message: error.message
           })
-          console.log(error)
           // 关闭处理中标志
           self.$data.pageStates.bDealingBusiness = false
           // 关闭完成中处理标志

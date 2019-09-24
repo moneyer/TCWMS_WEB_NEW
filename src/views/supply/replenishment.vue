@@ -5,34 +5,29 @@
   <el-container direction="vertical">
     <el-header
       height="auto"
-      style="width: 100%"
-    >
+      style="width: 100%">
       <el-row class="header-title">
         <el-col :span="24">
           <div
-            v-if="pageStates.curBillBcd=='CRD'"
-            class="grid-content"
-          >
+            v-if="pageStates.curBillBcd==='CRD'"
+            class="grid-content">
             拆零补货
           </div>
           <div
-            v-else-if="pageStates.curBillBcd=='ZRD'"
-            class="grid-content"
-          >
+            v-else-if="pageStates.curBillBcd==='ZRD'"
+            class="grid-content">
             整件补货
           </div>
           <div
-            v-else-if="pageStates.curBillBcd=='SRD'"
-            class="grid-content"
-          >
+            v-else-if="pageStates.curBillBcd==='SRD'"
+            class="grid-content">
             拆零存储补货
           </div>
         </el-col>
       </el-row>
       <el-row
         :gutter="20"
-        class="header-font"
-      >
+        class="header-font">
         <el-col :span="8">
           <div class="grid-content">
             当前模式：{{ pageStates.showMode }}
@@ -47,12 +42,10 @@
           <el-badge
             class="resetsup"
             :value="pageStates.showLTaskNum"
-            :max="99"
-          >
+            :max="99">
             <el-button
               type="primary"
-              class="badge-style"
-            >
+              class="badge-style">
               {{ pageStates.showLTask }}
             </el-button>
           </el-badge>
@@ -60,12 +53,10 @@
         <el-col :span="4">
           <el-badge
             :value="pageStates.showRTaskNum"
-            :max="99"
-          >
+            :max="99">
             <el-button
               type="warning"
-              class="badge-style"
-            >
+              class="badge-style">
               {{ pageStates.showRTask }}
             </el-button>
           </el-badge>
@@ -73,8 +64,7 @@
       </el-row>
       <el-row
         :gutter="20"
-        class="header-font"
-      >
+        class="header-font">
         <el-col :span="13">
           <div class="grid-content">
             单据号：{{ billHead.Billno }}
@@ -93,8 +83,7 @@
             v-loading.fullscreen.lock="pageStates.fullscreenLoading"
             type="primary"
             class="btn-setting"
-            @click="handleGetTask('1')"
-          >
+            @click="handleGetTask('1')">
             获取任务
           </el-button>
         </el-col>
@@ -104,22 +93,19 @@
             v-loading.fullscreen.lock="pageStates.fullscreenLoading"
             type="success"
             class="btn-setting"
-            @click="handleGetTask('2')"
-          >
+            @click="handleGetTask('2')">
             补货
           </el-button>
         </el-col>
         <el-col
           :span="6"
-          :offset="6"
-        >
+          :offset="6">
           <el-button
             v-if="pageStates.curMode==='2'"
             v-loading.fullscreen.lock="pageStates.fullscreenLoading"
             type="info"
             class="btn-setting"
-            @click="handleCheckBill"
-          >
+            @click="handleCheckBill">
             完成
           </el-button>
         </el-col>
@@ -127,8 +113,7 @@
           <el-button
             type="warning"
             class="btn-setting"
-            @click="handleQueryRecord"
-          >
+            @click="handleQueryRecord">
             查看记录
           </el-button>
         </el-col>
@@ -137,8 +122,7 @@
             v-if="pageStates.curMode==='1'"
             type="danger"
             class="btn-setting"
-            @click="handleReturnToMenu"
-          >
+            @click="handleReturnToMenu">
             退出
           </el-button>
         </el-col>
@@ -148,8 +132,7 @@
             v-loading.fullscreen.lock="pageStates.fullscreenLoading"
             type="danger"
             class="btn-setting"
-            @click="handleGetTask('1')"
-          >
+            @click="handleGetTask('1')">
             返回
           </el-button>
         </el-col>
@@ -166,29 +149,24 @@
     </el-main>
     <el-dialog
       title="查看记录"
-      :visible.sync="pageStates.dialogTableVisible"
-    >
+      :visible.sync="pageStates.dialogTableVisible">
       <el-table :data="billQueryBody">
         <el-table-column
           property="Gdsname"
           label="品名"
-          width="330"
-        />
+          width="330" />
         <el-table-column
           property="Setnum"
           label="应补件数"
-          width="130"
-        />
+          width="130" />
         <el-table-column
           property="Factsetnum"
           label="实补件数"
-          width="130"
-        />
+          width="130" />
         <el-table-column
           property="Status"
           label="状态"
-          width="160"
-        />
+          width="160" />
       </el-table>
       <div
         slot="footer"
